@@ -1,23 +1,42 @@
 package model;
 
 public class boardgame extends Toy {
-	int playerNum;
+	int minPlayers;
+	int maxPlayers;
 	String designers;
 	
 	
 	
-	public boardgame(int serial, String name, String brand, float price, int availableCount, 
-			int ageRating, int playerNum, String designers) {
+	public boardgame(long serial, String name, String brand, float price, int availableCount, 
+			int ageRating, String playerNum, String designers) {
 		super(serial, name, brand, price, availableCount, ageRating);
-		this.playerNum = playerNum;
+		String playerNumArray[] = playerNum.split("-");
+		minPlayers = Integer.parseInt(playerNumArray[0]);
+		minPlayers = Integer.parseInt(playerNumArray[1]);
 		this.designers = designers;
 	}
 	
-	public int getPlayerNumber() {
-		return playerNum;
+	public int getMinPlayers() {
+		return minPlayers;
 	}
 	
-	public void setPlayerNumber(int playerNumber) {
-		this.playerNum = playerNumber;
+	public int getMaxPlayers() {
+		return maxPlayers;
+	}
+	
+	public void setMinPlayers(int playerNumber) {
+		this.minPlayers = playerNumber;
+	}
+	
+	public void setMaxPlayers(int playerNumber) {
+		this.maxPlayers = playerNumber;
+	}
+	
+	public String getDesigners() {
+		return designers;
+	}
+	
+	public void setDesigners(String designers) {
+		this.designers = designers;
 	}
 }

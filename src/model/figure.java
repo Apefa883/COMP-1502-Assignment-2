@@ -5,7 +5,7 @@ public class figure extends Toy{
 	
 	
 	
-	public figure(int serial, String name, String brand, float price, int availableCount, 
+	public figure(long serial, String name, String brand, float price, int availableCount, 
 			int ageRating, char classification) {
 		super(serial, name, brand, price, availableCount, ageRating);
 		this.classification = classification;

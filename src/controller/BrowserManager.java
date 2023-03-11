@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import model.Toy;
+import model.animal;
+import model.boardgame;
+import model.figure;
+import model.puzzle;
 
 public class BrowserManager {
 	//This class will eventually be the controller part of our MVC architecture!
@@ -31,20 +35,35 @@ public class BrowserManager {
 				while (fileReader.hasNextLine()) {
 					currentLine = fileReader.nextLine();
 					if (Character.getNumericValue(currentLine.charAt(0)) < 2) {
-						System.out.println("Figure");
+						parsedLine = currentLine.split(";");
+						figure newToy = new figure(Long.parseLong(parsedLine[0]),parsedLine[1],parsedLine[2],
+								Float.parseFloat(parsedLine[3]),Integer.parseInt(parsedLine[4]),
+								Integer.parseInt(parsedLine[5]),parsedLine[6].charAt(0));
+						Inventory.add(newToy);
+						
 					} else if(Character.getNumericValue(currentLine.charAt(0)) < 4) {
-						System.out.println("Animal");
+						
+						parsedLine = currentLine.split(";");
+						animal newToy = new animal(Long.parseLong(parsedLine[0]),parsedLine[1],parsedLine[2],
+								Float.parseFloat(parsedLine[3]),Integer.parseInt(parsedLine[4]),
+								Integer.parseInt(parsedLine[5]),parsedLine[6],parsedLine[7].charAt(0));
+						Inventory.add(newToy);
+						
 					} else if(Character.getNumericValue(currentLine.charAt(0)) < 7) {
-						System.out.println("Puzzle");
+						parsedLine = currentLine.split(";");
+						puzzle newToy = new puzzle(Long.parseLong(parsedLine[0]),parsedLine[1],parsedLine[2],
+								Float.parseFloat(parsedLine[3]),Integer.parseInt(parsedLine[4]),
+								Integer.parseInt(parsedLine[5]),parsedLine[6].charAt(0));
+						Inventory.add(newToy);
+						
 					} else {
-						System.out.println("Board Game");
+						parsedLine = currentLine.split(";");
+						boardgame newToy = new boardgame(Long.parseLong(parsedLine[0]),parsedLine[1],parsedLine[2],
+								Float.parseFloat(parsedLine[3]),Integer.parseInt(parsedLine[4]),
+								Integer.parseInt(parsedLine[5]),parsedLine[6],parsedLine[7]);
+						Inventory.add(newToy);
 					}
 				}
-					//parsedLine = currentLine.split(";");
-					//Toy newToy = new Toy(Integer.parseInt(parsedLine[0]), 
-					//Integer.parseInt(parsedLine[1]), Integer.parseInt(parsedLine[2]));
-					//Inventory.add(newToy);
-				
 			} catch(FileNotFoundException e) {
 				System.out.println("ERROR: ARCHIVE FILE NOT FOUND!");
 			}
