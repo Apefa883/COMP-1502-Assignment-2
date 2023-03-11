@@ -1,7 +1,6 @@
 package model;
 
 public abstract class Toy {
-<<<<<<< HEAD
 	private int serial;
 	private String name;
 	private String brand;
@@ -80,16 +79,5 @@ public abstract class Toy {
 		String title = (brand+" "+name+" - "+price+"\n"+"For ages "+ageRating+" and up. "+availableCount+" in stock."
 				+" Serial # "+serial);
 		return title;
-=======
-	
-	private String toy; // temp
-	
-	public String getToy() {
-		return toy;
-	}
-	
-	public void setToy(String toy) {
-		this.toy = toy;
->>>>>>> 802938362464bc54e40d60e6416bf4399a1b7957
 	}
 }
