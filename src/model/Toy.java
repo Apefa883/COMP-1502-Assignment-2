@@ -74,4 +74,8 @@ public abstract class Toy {
 	public void buyToy(int bought) {
 		this.availableCount += bought;
 	}
+	
+	public String format() {
+		return "bruh";
+	}
 }
