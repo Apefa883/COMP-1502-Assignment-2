@@ -22,7 +22,9 @@ public class BrowserManager {
 	}
 
 
-
+	/**
+	 * Loads all data contained the toys.txt file.
+	 */
 	private void loadData() {
 		System.out.println("Farting now...");
 		File warehouse = new File(FILE_PATH);
@@ -64,6 +66,7 @@ public class BrowserManager {
 						Inventory.add(newToy);
 					}
 				}
+				fileReader.close();
 			} catch(FileNotFoundException e) {
 				System.out.println("ERROR: ARCHIVE FILE NOT FOUND!");
 			}

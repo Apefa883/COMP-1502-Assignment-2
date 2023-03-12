@@ -19,4 +19,23 @@ public class figure extends Toy{
 		this.classification = classification;
 	}
 
+	public String toString() {
+		String title = (brand+" "+name);
+		switch(classification) {
+		case 'A':
+			title+=(" action figure ");
+			break;
+		case 'D':
+			title+=(" doll ");
+			break;
+		case 'H':
+			title+=(" historical figure ");
+			break;
+		default:
+			title += (" figure ");
+			break;
+	}
+		title += ("$"+price+"\n"+"For ages "+ageRating+" and up. "+availableCount+" in stock."+" Serial #"+serial);
+		return title;
+	}
 }

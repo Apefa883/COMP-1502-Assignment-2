@@ -27,5 +27,25 @@ public class animal extends Toy {
 		this.size = size;
 	}
 
+	public String toString() {
+		String title = (brand+" "+name);
+		switch(size) {
+		case 'S':
+			title+=(" Small ");
+			break;
+		case 'M':
+			title+=(" Medium ");
+			break;
+		case 'L':
+			title+=(" Large ");
+			break;
+		default:
+			title += ("  ");
+			break;
+	}
+		title += (material+" animal. $"+price+"\n"+"For ages "+ageRating+" and up. "+availableCount+" in stock."+
+	" Serial #"+serial);
+		return title;
+	}
 }
 

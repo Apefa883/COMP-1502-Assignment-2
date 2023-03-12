@@ -12,7 +12,7 @@ public class boardgame extends Toy {
 		super(serial, name, brand, price, availableCount, ageRating);
 		String playerNumArray[] = playerNum.split("-");
 		minPlayers = Integer.parseInt(playerNumArray[0]);
-		minPlayers = Integer.parseInt(playerNumArray[1]);
+		maxPlayers = Integer.parseInt(playerNumArray[1]);
 		this.designers = designers;
 	}
 	
@@ -38,5 +38,12 @@ public class boardgame extends Toy {
 	
 	public void setDesigners(String designers) {
 		this.designers = designers;
+	}
+	
+	public String toString() {
+		String title = (brand+" "+name+" $"+price+"\n"+"For "+minPlayers+"-"+maxPlayers+
+				" players, ages "+ageRating+" and up. "+availableCount+" in stock."
+				+" Serial #"+serial);
+		return title;
 	}
 }

@@ -1,12 +1,12 @@
 package model;
 
 public abstract class Toy {
-	private long serial;
-	private String name;
-	private String brand;
-	private float price;
-	private int availableCount;
-	private int ageRating;
+	protected long serial;
+	protected String name;
+	protected String brand;
+	protected float price;
+	protected int availableCount;
+	protected int ageRating;
 	
 	
 	public Toy(long serial, String name, String brand, float price, int availableCount, int ageRating) {
@@ -73,11 +73,5 @@ public abstract class Toy {
 	
 	public void buyToy(int bought) {
 		this.availableCount += bought;
-	}
-	
-	public String toString() {
-		String title = (brand+" "+name+" $"+price+"\n"+"For ages "+ageRating+" and up. "+availableCount+" in stock."
-				+" Serial #"+serial);
-		return title;
 	}
 }
