@@ -140,18 +140,43 @@ public class AppMenu {
 	}
 
 	public String promptName() {
-		System.out.println("Enter toy name: ");
+		System.out.print("\nEnter toy name: ");
 		String type = input.nextLine().trim();
+		while(type.length() < 1) {
+			System.out.print("\nBlank string entered! Enter toy name: ");
+			type = input.nextLine().trim();
+		}
 		return type;
 	}
-
-<<<<<<< HEAD
 	
-	public void promptBrand() {
-		// TODO Auto-generated method stub
-		
+	public String promptBrand() {
+		System.out.print("\nEnter toy brand: ");
+		String type = input.nextLine().trim();
+		while(type.length() < 1) {
+			System.out.print("\nBlank string entered! Enter toy name: ");
+			type = input.nextLine().trim();
+		}
+		return type;
 	}
-
+	
+	public int promptAppropAge() {
+		System.out.print("\nEnter Appropriate Age: ");
+		
+		String type = input.nextLine().trim();
+		int age = -1;
+		while(age == -1) {
+			try {	
+				age = Integer.parseInt(type);
+				break;
+			} catch (Exception e) {
+				System.out.print("\nInvalid Value! Try again: ");
+			}
+			type = input.nextLine().trim();
+		}
+		return age;
+	}
+	
+	//Functions for the specialized type thingamabobs
 	public void promptMinAge() {
 		// TODO Auto-generated method stub
 		
@@ -161,12 +186,4 @@ public class AppMenu {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	public void promptAppropAge() {
-		// TODO Auto-generated method stub
-		
-	}
-
-=======
->>>>>>> 95a1bdc919780d1302987e66f4db83469f88c90e
 }

@@ -89,21 +89,16 @@ public class BrowserManager {
 		Scanner input = new Scanner(System.in);
 		
 		String[] parameters = new String[7];
-		AppMen.promptSerial();
-		parameters[0] = input.nextLine().toLowerCase();
+		parameters[0] = validateSerial();
 		
+		parameters[1] = AppMen.promptName();
 		
-		AppMen.promptName();
-		parameters[1] = input.nextLine().toLowerCase();
+		parameters[2] = AppMen.promptBrand();
 		
-		AppMen.promptBrand();
-		parameters[2] = input.nextLine().toLowerCase();
+		parameters[3] = ""+AppMen.promptAppropAge();
 		
-		AppMen.promptAppropAge();
-		parameters[3] = input.nextLine().toLowerCase();
-		
-		switch(parameters[0].charAt(0)) {
-		
+		if(Character.getNumericValue(parameters[0].charAt(0)) < 2) {
+			System.out.println("Mayonnaise Low!");
 		}
 	}
 
@@ -193,30 +188,19 @@ public class BrowserManager {
 	}
 
 
-<<<<<<< HEAD
-	private void searchByName() { 
-=======
 	private void searchByName() {
->>>>>>> 95a1bdc919780d1302987e66f4db83469f88c90e
 		Scanner input = new Scanner(System.in);
 	    AppMen.promptName();
 	    String name = input.nextLine().toLowerCase();
 
 	    ArrayList<Toy> matches = new ArrayList<>();
-<<<<<<< HEAD
 
-=======
-	    
->>>>>>> 95a1bdc919780d1302987e66f4db83469f88c90e
         for (Toy toy : Inventory) {
             if (toy.getName().toLowerCase().contains(name.toLowerCase())) {
                 matches.add(toy);
             }
-<<<<<<< HEAD
         }
-=======
-        }	
->>>>>>> 95a1bdc919780d1302987e66f4db83469f88c90e
+
 	}
 
 	private int searchBySerial() {
