@@ -145,6 +145,7 @@ public class AppMenu {
 		return type;
 	}
 
+<<<<<<< HEAD
 	
 	public void promptBrand() {
 		// TODO Auto-generated method stub
@@ -166,4 +167,6 @@ public class AppMenu {
 		
 	}
 
+=======
+>>>>>>> 95a1bdc919780d1302987e66f4db83469f88c90e
 }

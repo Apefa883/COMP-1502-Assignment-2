@@ -193,18 +193,30 @@ public class BrowserManager {
 	}
 
 
+<<<<<<< HEAD
 	private void searchByName() { 
+=======
+	private void searchByName() {
+>>>>>>> 95a1bdc919780d1302987e66f4db83469f88c90e
 		Scanner input = new Scanner(System.in);
 	    AppMen.promptName();
 	    String name = input.nextLine().toLowerCase();
 
 	    ArrayList<Toy> matches = new ArrayList<>();
+<<<<<<< HEAD
 
+=======
+	    
+>>>>>>> 95a1bdc919780d1302987e66f4db83469f88c90e
         for (Toy toy : Inventory) {
             if (toy.getName().toLowerCase().contains(name.toLowerCase())) {
                 matches.add(toy);
             }
+<<<<<<< HEAD
         }
+=======
+        }	
+>>>>>>> 95a1bdc919780d1302987e66f4db83469f88c90e
 	}
 
 	private int searchBySerial() {
