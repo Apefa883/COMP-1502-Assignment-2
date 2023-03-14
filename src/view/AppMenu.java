@@ -118,4 +118,10 @@ public class AppMenu {
 		System.out.println("*********** THANKS FOR VISITING US! ***********");
 	}
 
+	public String promptName() {
+		System.out.println("Enter toy name: ");
+		String type = input.nextLine().trim();
+		return type;
+	}
+
 }

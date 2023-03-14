@@ -166,8 +166,17 @@ public class BrowserManager {
 
 
 	private void searchByName() {
-		// TODO Auto-generated method stub
-		
+		Scanner input = new Scanner(System.in);
+	    AppMen.promptName();
+	    String name = input.nextLine().toLowerCase();
+
+	    ArrayList<Toy> matches = new ArrayList<>();
+	    
+        for (Toy toy : Inventory) {
+            if (toy.getName().toLowerCase().contains(name.toLowerCase())) {
+                matches.add(toy);
+            }
+        }	
 	}
 
 	private void searchBySerial() {
