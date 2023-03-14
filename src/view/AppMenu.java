@@ -3,6 +3,7 @@ package view;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import exception.NegativePrice;
 import model.Toy;
 
 public class AppMenu {
@@ -163,17 +164,43 @@ public class AppMenu {
 		System.out.print("\nEnter Appropriate Age: ");
 		
 		String type = input.nextLine().trim();
-		int age = -1;
-		while(age == -1) {
+		int age = 0;
+		while(age <= 0) {
 			try {	
 				age = Integer.parseInt(type);
-				break;
+				if(age <=0) {
+					System.out.print("Age must be positive! Try again:");
+				}
 			} catch (Exception e) {
 				System.out.print("\nInvalid Value! Try again: ");
 			}
 			type = input.nextLine().trim();
 		}
 		return age;
+	}
+	
+	
+	public float promptPrice() {
+		System.out.print("\nEnter price: ");
+		String priceIO = input.nextLine().trim();
+		float price = 0;
+		while(price <= 0) {
+			try {	
+				price = Float.parseFloat(priceIO);
+				if(price <= 0) {
+					System.out.println(price);
+					throw new NegativePrice(price);
+				} else {
+					break;
+				}
+			} catch (NegativePrice e) {
+				System.out.println("Price cannot be a negative number! Try again: ");
+			}catch (Exception e2) {
+				System.out.print("\nPrice must be a valid numerical value! Try again: ");
+			}
+			priceIO = input.nextLine().trim();
+		}
+		return price;
 	}
 	
 	//Functions for the specialized type thingamabobs

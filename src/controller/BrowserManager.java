@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import exception.NegativePrice;
 import model.Toy;
 import model.animal;
 import model.boardgame;
@@ -95,10 +96,12 @@ public class BrowserManager {
 		
 		parameters[2] = AppMen.promptBrand();
 		
-		parameters[3] = ""+AppMen.promptAppropAge();
+		parameters[3] = ""+AppMen.promptPrice();
+		
+		parameters[4] = ""+AppMen.promptAppropAge();
 		
 		if(Character.getNumericValue(parameters[0].charAt(0)) < 2) {
-			System.out.println("Mayonnaise Low!");
+			
 		}
 	}
 
