@@ -11,18 +11,16 @@ import model.animal;
 import model.boardgame;
 import model.figure;
 import model.puzzle;
-import mru.game.model.Player;
 import view.AppMenu;
 
 public class BrowserManager {
-	//This class will eventually be the controller part of our MVC architecture!
+	//This class is the controller part of our MVC architecture!
 	ArrayList<Toy> Inventory = new ArrayList<Toy>();
 	AppMenu AppMen;
 	private final String FILE_PATH = "res/toys.txt";
 	public boolean flag;
 	
-	public BrowserManager() throws Exception {
-		System.out.println("bababooey");
+	public BrowserManager() {
 		//Creates arraylist (loaded in other function)
 		AppMen = new AppMenu();
 		loadData();
@@ -71,7 +69,7 @@ public class BrowserManager {
 		AppMen.promptSaving();
 		
 		for (Toy t: Inventory) {
-			pw.println(t.format()); // need to fix format method
+			pw.println(t.format());
 		}
 		
 		pw.close();
@@ -80,21 +78,48 @@ public class BrowserManager {
 
 	private void RemoveToy() {
 		
-		
 	}
 
 	private void AddToy() {
-		// TODO Auto-generated method stub
+		/*
+		 * Basic idea - we do common prompts to fill up the superclass, then a switch statement to handle other stuff
+		 * The new toy is stored as a string similar to the toys.txt format.
+		 * This will require a metric crapton of prompts in AppMenu. So there's that.
+		 */
+		Scanner input = new Scanner(System.in);
 		
+		String[] parameters = new String[7];
+		AppMen.promptSerial();
+		parameters[0] = input.nextLine().toLowerCase();
+		
+		
+		AppMen.promptName();
+		parameters[1] = input.nextLine().toLowerCase();
+		
+		AppMen.promptBrand();
+		parameters[2] = input.nextLine().toLowerCase();
+		
+		AppMen.promptAppropAge();
+		parameters[3] = input.nextLine().toLowerCase();
+		
+		switch(parameters[0].charAt(0)) {
+		
+		}
 	}
 
 	private void Search() {
-			
-			char option = AppMen.showSubMenu();
-			
+		char option = 0;
+		Boolean flag = true;
+		while(flag == true) {
+			option = AppMen.showSubMenu();
 			switch (option) {
 			case '1':
-				searchBySerial();
+				int place = searchBySerial();
+				if(place > -1) {
+					AppMen.displaySerial(Inventory,place);
+				} else {
+					AppMen.OutOfStock();
+				}
 				break;
 			case '2':
 				searchByName();
@@ -104,11 +129,14 @@ public class BrowserManager {
 				break;
 				
 			case '4':
+				flag = false;
+				lunchApplication();
 				break;
 				
 			default:
 				break;
 			}
+		}
 		
 	}
 
@@ -142,7 +170,7 @@ public class BrowserManager {
 	        Toy selectedToy = null;
 	        
 	        for (Toy toy : matches) {
-	            if (toy.getSerial().equals(selection)) { // need to fix
+	            if (toy.getSerial() == selection) {
 	                selectedToy = toy;
 	                break;
 	            }
@@ -165,21 +193,63 @@ public class BrowserManager {
 	}
 
 
-	private void searchByName() {
-		// TODO Auto-generated method stub
-		
+	private void searchByName() { 
+		Scanner input = new Scanner(System.in);
+	    AppMen.promptName();
+	    String name = input.nextLine().toLowerCase();
+
+	    ArrayList<Toy> matches = new ArrayList<>();
+
+        for (Toy toy : Inventory) {
+            if (toy.getName().toLowerCase().contains(name.toLowerCase())) {
+                matches.add(toy);
+            }
+        }
 	}
 
-	private void searchBySerial() {
-		// TODO Auto-generated method stub
-		
+	private int searchBySerial() {
+		int place = -1;
+		String serial = validateSerial();
+	    //Basic idea - iterates through list to find the given toy. Gonna be simpler than the name one.
+	    for(int i = 0; i<Inventory.size(); i++ ) {
+	    	if(Long.parseLong(serial) == Long.parseLong(Inventory.get(i).getSerial())) {
+	    		place = i;
+	    		break;
+	    	}
+	    }
+	    return place;
+	    
 	}
-
+	
+	private String validateSerial() {
+		Scanner input = new Scanner(System.in);
+	    AppMen.promptSerial();
+	    String serial = input.nextLine();
+	    Boolean validNumber = false;
+	    Boolean validLength = false;
+	    while (validNumber == false || validLength == false) {
+	    	try {
+	    		Long.parseLong(serial);
+	    		validNumber = true;
+	    		if(serial.length() == 10) {
+	    			validLength = true;
+	    		} else {
+	    			AppMen.angrySerial();
+	    			serial = input.nextLine();
+	    		}
+	    	} catch(Exception e) {
+	    		AppMen.angrySerial();
+	    		serial = input.nextLine();
+	    	}
+	    }
+		return serial;
+	}
+	
+	
 	/**
 	 * Loads all data contained the toys.txt file.
 	 */
 	private void loadData() {
-		System.out.println("Farting now...");
 		File warehouse = new File(FILE_PATH);
 		String currentLine;
 		String[] parsedLine;
@@ -191,7 +261,7 @@ public class BrowserManager {
 					currentLine = fileReader.nextLine();
 					if (Character.getNumericValue(currentLine.charAt(0)) < 2) {
 						parsedLine = currentLine.split(";");
-						figure newToy = new figure(Long.parseLong(parsedLine[0]),parsedLine[1],parsedLine[2],
+						figure newToy = new figure(parsedLine[0],parsedLine[1],parsedLine[2],
 								Float.parseFloat(parsedLine[3]),Integer.parseInt(parsedLine[4]),
 								Integer.parseInt(parsedLine[5]),parsedLine[6].charAt(0));
 						Inventory.add(newToy);
@@ -199,21 +269,21 @@ public class BrowserManager {
 					} else if(Character.getNumericValue(currentLine.charAt(0)) < 4) {
 						
 						parsedLine = currentLine.split(";");
-						animal newToy = new animal(Long.parseLong(parsedLine[0]),parsedLine[1],parsedLine[2],
+						animal newToy = new animal(parsedLine[0],parsedLine[1],parsedLine[2],
 								Float.parseFloat(parsedLine[3]),Integer.parseInt(parsedLine[4]),
 								Integer.parseInt(parsedLine[5]),parsedLine[6],parsedLine[7].charAt(0));
 						Inventory.add(newToy);
 						
 					} else if(Character.getNumericValue(currentLine.charAt(0)) < 7) {
 						parsedLine = currentLine.split(";");
-						puzzle newToy = new puzzle(Long.parseLong(parsedLine[0]),parsedLine[1],parsedLine[2],
+						puzzle newToy = new puzzle(parsedLine[0],parsedLine[1],parsedLine[2],
 								Float.parseFloat(parsedLine[3]),Integer.parseInt(parsedLine[4]),
 								Integer.parseInt(parsedLine[5]),parsedLine[6].charAt(0));
 						Inventory.add(newToy);
 						
 					} else {
 						parsedLine = currentLine.split(";");
-						boardgame newToy = new boardgame(Long.parseLong(parsedLine[0]),parsedLine[1],parsedLine[2],
+						boardgame newToy = new boardgame(parsedLine[0],parsedLine[1],parsedLine[2],
 								Float.parseFloat(parsedLine[3]),Integer.parseInt(parsedLine[4]),
 								Integer.parseInt(parsedLine[5]),parsedLine[6],parsedLine[7]);
 						Inventory.add(newToy);
@@ -225,5 +295,5 @@ public class BrowserManager {
 			}
 		}
 	}
-			
+	
 }

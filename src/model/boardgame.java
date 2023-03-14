@@ -7,7 +7,7 @@ public class boardgame extends Toy {
 	
 	
 	
-	public boardgame(long serial, String name, String brand, float price, int availableCount, 
+	public boardgame(String serial, String name, String brand, float price, int availableCount, 
 			int ageRating, String playerNum, String designers) {
 		super(serial, name, brand, price, availableCount, ageRating);
 		String playerNumArray[] = playerNum.split("-");
@@ -45,5 +45,13 @@ public class boardgame extends Toy {
 				" players, ages "+ageRating+" and up. "+availableCount+" in stock."
 				+" Serial #"+serial);
 		return title;
+	}
+	
+	public String format() {
+		//Example: 9074383778;Blue Max;Gamearo;199.37;11;2;1-3;Rojin Poole
+		String formattedTitle;
+		formattedTitle = (serial+";"+name+";"+brand+";"+price+";"+availableCount+";"+ageRating+";"+minPlayers+"-"+
+		maxPlayers+";"+designers);
+		return formattedTitle;
 	}
 }

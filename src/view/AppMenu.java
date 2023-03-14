@@ -1,6 +1,9 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import model.Toy;
 
 public class AppMenu {
 	//This class will display things to the user
@@ -31,7 +34,7 @@ public class AppMenu {
 		System.out.println("");
 		System.out.println("How We May Help You?");
 		System.out.println("");
-		System.out.println("(1)	  Search Inventory and Purchase Toy");
+		System.out.println("(1)   Search Inventory and Purchase Toy");
 		System.out.println("(2)   Add New Toy");
 		System.out.println("(3)   Remove Toy");
 		System.out.println("(4)   Save & Exit");
@@ -64,7 +67,7 @@ public class AppMenu {
 	}
 	
 	public String promptType() {
-		System.out.print("Enter a toy type: ");
+		System.out.print("Enter a toy type: \n");
 		System.out.println("(1)   Figure");
 		System.out.println("(2)   Animal");
 		System.out.println("(3)   Puzzle");
@@ -72,7 +75,21 @@ public class AppMenu {
 		String type = input.nextLine().trim();
 		return type;
 	}
+	
+	public void promptSerial() {
+		System.out.print("\nEnter a serial number (must be a 10-digit number): ");
+	}
+	
+	public void angrySerial() {
+		System.out.println("Invalid serial entered! It must be a valid 10-digit number: ");
+	}
 
+	public void displaySerial(ArrayList<Toy> Inventory,int place) {
+		System.out.println("This item found: \n");
+		System.out.println(Inventory.get(place)+"\n");
+		
+	}
+	
 	public void promptContinue() {
 		System.out.println("Press \"Enter\" to continue...");
 		input.nextLine();
@@ -82,6 +99,10 @@ public class AppMenu {
 		System.out.println("Invalid selection...");
 		System.out.println("Please Try Again: ");
 		input.nextLine();
+	}
+	
+	public void OutOfStock() {
+		System.out.println("\nThis item is out of stock.\n");
 	}
 
 	public String promptSelectType() {
@@ -116,6 +137,33 @@ public class AppMenu {
 	public void promptSaved() {
 		System.out.println("");
 		System.out.println("*********** THANKS FOR VISITING US! ***********");
+	}
+
+	public String promptName() {
+		System.out.println("Enter toy name: ");
+		String type = input.nextLine().trim();
+		return type;
+	}
+
+	
+	public void promptBrand() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void promptMinAge() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void promptMaxAge() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void promptAppropAge() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

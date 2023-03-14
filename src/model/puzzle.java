@@ -5,7 +5,7 @@ public class puzzle extends Toy{
 	
 	
 	
-	public puzzle(long serial, String name, String brand, float price, int availableCount, 
+	public puzzle(String serial, String name, String brand, float price, int availableCount, 
 			int ageRating, char puzzleType) {
 		super(serial, name, brand, price, availableCount, ageRating);
 		this.puzzleType = puzzleType;
@@ -40,10 +40,17 @@ public class puzzle extends Toy{
 			default:
 				title += (" Puzzle ");
 				break;
-		}
+			}
 		title += (" $"+price+"\n"+"For ages "+ageRating+" and up. "+availableCount+" in stock."
 				+" Serial #"+serial);
 		return title;
+	}
+	
+	public String format() {
+		//Example: 5726898779;Pocket Cube;Game Orc;42.83;1;4;M
+		String formattedTitle;
+		formattedTitle = (serial+";"+name+";"+brand+";"+price+";"+availableCount+";"+ageRating+";"+puzzleType);
+		return formattedTitle;
 	}
 
 }

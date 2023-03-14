@@ -1,7 +1,7 @@
 package model;
 
 public abstract class Toy {
-	protected long serial;
+	protected String serial;
 	protected String name;
 	protected String brand;
 	protected float price;
@@ -9,7 +9,7 @@ public abstract class Toy {
 	protected int ageRating;
 	
 	
-	public Toy(long serial, String name, String brand, float price, int availableCount, int ageRating) {
+	public Toy(String serial, String name, String brand, float price, int availableCount, int ageRating) {
 		this.serial = serial;
 		this.name = name;
 		this.brand = brand;
@@ -18,7 +18,7 @@ public abstract class Toy {
 		this.ageRating = ageRating;
 	}
 	
-	public void setSerial(long newSerial) {
+	public void setSerial(String newSerial) {
 		serial = newSerial;
 	}
 	
@@ -26,7 +26,7 @@ public abstract class Toy {
 		name = newName;
 	}
 	
-	public long getSerial() {
+	public String getSerial() {
 		return serial;
 	}
 	
