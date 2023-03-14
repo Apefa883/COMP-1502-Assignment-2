@@ -89,8 +89,8 @@ public class BrowserManager {
 		 */
 		Scanner input = new Scanner(System.in);
 		
-		String[] parameters = new String[7];
-		parameters[0] = validateSerial();
+		String[] parameters = new String[8];
+		parameters[0] = newSerial();
 		
 		parameters[1] = AppMen.promptName();
 		
@@ -98,11 +98,46 @@ public class BrowserManager {
 		
 		parameters[3] = ""+AppMen.promptPrice();
 		
-		parameters[4] = ""+AppMen.promptAppropAge();
+		parameters[4] = ""+AppMen.promptCount();
+		
+		parameters[5] = ""+AppMen.promptAppropAge();
 		
 		if(Character.getNumericValue(parameters[0].charAt(0)) < 2) {
+			//Parameters for Figures
+			parameters[6] = AppMen.promptClassification();
+			Toy newToy = new figure(parameters[0],parameters[1],parameters[2],Float.parseFloat(parameters[3]),
+					Integer.parseInt(parameters[4]),Integer.parseInt(parameters[5]),parameters[6].charAt(0));
+			Inventory.add(newToy);
 			
+		} else if(Character.getNumericValue(parameters[0].charAt(0)) < 4) {
+			//Parameters for Animals
+			parameters[6] = AppMen.promptMaterial();
+			parameters[7] = AppMen.promptSize();
+			
+			Toy newToy = new animal(parameters[0],parameters[1],parameters[2],Float.parseFloat(parameters[3]),
+					Integer.parseInt(parameters[4]),Integer.parseInt(parameters[5]),parameters[6],
+					parameters[7].charAt(0));
+			Inventory.add(newToy);
+			
+		} else if(Character.getNumericValue(parameters[0].charAt(0)) < 7) {
+			//Parameters for Puzzles
+			parameters[6] = AppMen.promptPuzzleType();
+			
+			Toy newToy = new puzzle(parameters[0],parameters[1],parameters[2],Float.parseFloat(parameters[3]),
+					Integer.parseInt(parameters[4]),Integer.parseInt(parameters[5]),parameters[6].charAt(0));
+			Inventory.add(newToy);
+			
+		} else {
+			parameters[6] = AppMen.promptPlayerNum();
+			parameters[7] = AppMen.promptDesigners();
+			//Parameters for Board Games
+			
+			Toy newToy = new boardgame(parameters[0],parameters[1],parameters[2],Float.parseFloat(parameters[3]),
+					Integer.parseInt(parameters[4]),Integer.parseInt(parameters[5]),parameters[6],parameters[7]);
+			Inventory.add(newToy);
 		}
+		
+		AppMen.newToy();
 	}
 
 	private void Search() {
@@ -115,8 +150,10 @@ public class BrowserManager {
 				int place = searchBySerial();
 				if(place > -1) {
 					AppMen.displaySerial(Inventory,place);
+					AppMen.promptContinue();
 				} else {
 					AppMen.OutOfStock();
+					AppMen.promptContinue();
 				}
 				break;
 			case '2':
@@ -190,6 +227,18 @@ public class BrowserManager {
 	    }
 	}
 
+	
+	private String newSerial() {
+		String serial = AppMen.validateSerial();
+		Boolean existing = CheckExistingSerial(serial);
+		while(existing) {
+			AppMen.promptExistingSerial();
+			serial = AppMen.validateSerial();
+			existing = CheckExistingSerial(serial);
+		}
+		return serial;
+	}
+	
 
 	private void searchByName() {
 		Scanner input = new Scanner(System.in);
@@ -208,7 +257,7 @@ public class BrowserManager {
 
 	private int searchBySerial() {
 		int place = -1;
-		String serial = validateSerial();
+		String serial = AppMen.validateSerial();
 	    //Basic idea - iterates through list to find the given toy. Gonna be simpler than the name one.
 	    for(int i = 0; i<Inventory.size(); i++ ) {
 	    	if(Long.parseLong(serial) == Long.parseLong(Inventory.get(i).getSerial())) {
@@ -220,30 +269,17 @@ public class BrowserManager {
 	    
 	}
 	
-	private String validateSerial() {
-		Scanner input = new Scanner(System.in);
-	    AppMen.promptSerial();
-	    String serial = input.nextLine();
-	    Boolean validNumber = false;
-	    Boolean validLength = false;
-	    while (validNumber == false || validLength == false) {
-	    	try {
-	    		Long.parseLong(serial);
-	    		validNumber = true;
-	    		if(serial.length() == 10) {
-	    			validLength = true;
-	    		} else {
-	    			AppMen.angrySerial();
-	    			serial = input.nextLine();
-	    		}
-	    	} catch(Exception e) {
-	    		AppMen.angrySerial();
-	    		serial = input.nextLine();
+	private Boolean CheckExistingSerial(String serial) {
+		Boolean exists = false;
+		for(int i = 0; i<Inventory.size(); i++ ) {
+	    	if(Long.parseLong(serial) == Long.parseLong(Inventory.get(i).getSerial())) {
+	    		exists = true;
+	    		break;
 	    	}
 	    }
-		return serial;
+		return exists;
 	}
-	
+
 	
 	/**
 	 * Loads all data contained the toys.txt file.
@@ -294,5 +330,4 @@ public class BrowserManager {
 			}
 		}
 	}
-	
 }
