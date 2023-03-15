@@ -68,6 +68,10 @@ public class AppMenu {
 		return option;
 	}
 	
+	/**
+	 * Prompts the user for a toy type
+	 * @return returns the user's choice as a char
+	 */
 	public char promptType() {
 		System.out.print("Enter a toy type: \n");
 		System.out.println("(1)   Figure");
@@ -79,69 +83,97 @@ public class AppMenu {
 		return option;
 	}
 	
+	/**
+	 * Prompts the user for a serial.
+	 * Does not do anything other than display a message.
+	 */
 	public void promptSerial() {
 		System.out.print("\nEnter a serial number (must be a 10-digit number): ");
 	}
 	
+	/**
+	 * Yells at the user for inputting an incorrect serial.
+	 * Does not do anything other than display a message.
+	 */
 	public void angrySerial() {
 		System.out.println("Invalid serial entered! It must be a valid 10-digit number: ");
 	}
 
+	/**
+	 * Displays the serial number of a toy at the given place in the Inventory
+	 * Does not do anything other than display a message.
+	 */
 	public void displaySerial(ArrayList<Toy> Inventory,int place) {
 		System.out.println("This item found: \n");
 		System.out.println(Inventory.get(place)+"\n");
 		
 	}
 	
+	/**
+	 * Prompts the user to press enter to continue.
+	 */
 	public void promptContinue() {
 		System.out.println("Press \"Enter\" to continue...");
 		input.nextLine();
 	}
 
+	/**
+	 * Yells at the user for making a wrong choice
+	 */
 	public void promptInvalid() {
 		System.out.println("Invalid selection...");
 		System.out.println("Please Try Again: ");
 		input.nextLine();
 	}
 	
+	/**
+	 * Does nothing but print out an error message
+	 */
 	public void OutOfStock() {
 		System.out.println("\nNo items with this serial number found.\n");
 	}
-
-	public String promptSelectType() {
-		System.out.print("Select a toy to purchase (enter SN) or type 'cancel': ");
-		String selection = input.nextLine();
-		return selection;
-	}
-
+	
+	/**
+	 * Does nothing but print out an error message
+	 */
 	public void promptNotFound() {
 		System.out.println("No matches found.");
 	}
 
-	public void showToy() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	/**
+	 * Does nothing but print out an error message
+	 */
 	public void promptOutOfStock() {
 		System.out.println("Sorry, this toy is out of stock!");
 	}
 
+	/**
+	 * Does nothing but print out an error message
+	 */
 	public void promptPurchased() {
 		System.out.print("\nPurchase Successful!\n\n");
 		
 	}
 
+	/**
+	 * Lets the user know that their data is being saved
+	 */
 	public void promptSaving() {
 		System.out.println("");
 		System.out.println("Saving Data Into Database...");
 	}
 
+	/**
+	 * Thanks the user for visiting
+	 */
 	public void promptSaved() {
 		System.out.println("");
 		System.out.println("*********** THANKS FOR VISITING US! ***********");
 	}
 
+	/**
+	 * Prompts the user for a name, and prompts them again if they enter a blank string.
+	 */
 	public String promptName() {
 		System.out.print("\nEnter toy name: ");
 		String type = input.nextLine().trim();
@@ -152,6 +184,9 @@ public class AppMenu {
 		return type;
 	}
 	
+	/**
+	 * Prompts the user for a brand name, and prompts them again if they enter a blank string.
+	 */
 	public String promptBrand() {
 		System.out.print("\nEnter toy brand: ");
 		String type = input.nextLine().trim();
@@ -162,6 +197,10 @@ public class AppMenu {
 		return type;
 	}
 	
+	/**
+	 * Prompts the user for an age requirement for a toy, and prompts them again if they enter a negative integer
+	 * or a value that cannot be parsed as an integer.
+	 */
 	public int promptAppropAge() {
 		System.out.print("\nEnter Appropriate Age: ");
 		
@@ -182,7 +221,9 @@ public class AppMenu {
 		return age;
 	}
 	
-	
+	/**
+	 * Prompts the user for a price repeatedly until a valid float is entered.
+	 */
 	public float promptPrice() {
 		System.out.print("\nEnter price: ");
 		String priceIO = input.nextLine().trim();
@@ -205,6 +246,9 @@ public class AppMenu {
 		return price;
 	}
 	
+	/**
+	 * Prompts the user for serial number and validates it.
+	 */
 	public String validateSerial() {
 	    promptSerial();
 	    String serial = input.nextLine();
@@ -228,7 +272,10 @@ public class AppMenu {
 		return serial;
 	}
 	
-	//Functions for the specialized type thingamabobs
+	/**
+	 * Prompts the user for a count of a new toy
+	 * @return returns the count
+	 */
 	public int promptCount() {
 		System.out.print("\nEnter Available Count: ");
 		String CountIO = input.nextLine().trim();
@@ -251,6 +298,10 @@ public class AppMenu {
 		return Count;
 	}
 
+	/**
+	 * Prompts the user for a figure classification and validates the answer
+	 * @return returns the figure type as a string
+	 */
 	public String promptClassification() {
 		System.out.print("\nEnter Figure Classification: ");
 		char FigType = (input.nextLine().trim()+" ").charAt(0);
@@ -262,6 +313,10 @@ public class AppMenu {
 		return FigType+"";
 	}
 
+	/**
+	 * Prompts the user for a toy animal's material
+	 * @return returns the material type (string)
+	 */
 	public String promptMaterial() {
 		System.out.print("\nEnter Material: ");
 		String Material = input.nextLine().trim();
@@ -272,6 +327,10 @@ public class AppMenu {
 		return Material;
 	}
 
+	/**
+	 * Prompts the user for toy animal size
+	 * @return returns the size as a string
+	 */
 	public String promptSize() {
 		System.out.print("\nEnter Animal Size: ");
 		char Size = (input.nextLine().trim()+" ").charAt(0);
@@ -283,6 +342,11 @@ public class AppMenu {
 		return Size+"";
 	}
 
+	/**
+	 * Prompts the user to enter the minimum and maximum numbers of players, validates the input and returns a string
+	 * with the format "x-y"
+	 * @return returns the player range as a string
+	 */
 	public String promptPlayerNum() {
 		Boolean validated = false;
 		int min = -1;
@@ -291,7 +355,7 @@ public class AppMenu {
 		String maxString;
 		while(!validated) {
 			try {
-				System.out.print("\nEnter a minimum age: ");
+				System.out.print("\nEnter a minimum player count: ");
 				minString = input.nextLine().trim();
 				while(min <= 0) {
 					try {	
@@ -302,14 +366,14 @@ public class AppMenu {
 							break;
 						}
 					} catch (NegativePrice e) {
-						System.out.print("\nMinimum Age cannot be a negative number! Try again: ");
+						System.out.print("\nMinimum Count cannot be a negative number! Try again: ");
 					}catch (Exception e2) {
-						System.out.print("\nMinimum Age must be a valid positive whole number! Try again: ");
+						System.out.print("\nMinimum Count must be a valid positive whole number! Try again: ");
 					}
 					minString = input.nextLine().trim();
 				}
 				
-				System.out.print("\nEnter a maximum age: ");
+				System.out.print("\nEnter a maximum player count: ");
 				maxString = input.nextLine().trim();
 				while(max <= 0) {
 					try {	
@@ -320,9 +384,9 @@ public class AppMenu {
 							break;
 						}
 					} catch (NegativePrice e) {
-						System.out.print("\nMaximum Age cannot be a negative number! Try again: ");
+						System.out.print("\nMaximum Count cannot be a negative number! Try again: ");
 					}catch (Exception e2) {
-						System.out.print("\nMaximum Age must be a valid positive whole number! Try again: ");
+						System.out.print("\nMaximum Count must be a valid positive whole number! Try again: ");
 					}
 					maxString = input.nextLine().trim();
 				}
@@ -342,6 +406,10 @@ public class AppMenu {
 	}
 	
 	
+	/**
+	 * Prompts the user to enter the toy designers and validates their answer
+	 * @return returns the designer list as a string
+	 */
 	public String promptDesigners() {
 		System.out.print("\nEnter Designer Names (Use ',' to separate the names if there is more than"
 				+ " one name): ");
@@ -357,6 +425,10 @@ public class AppMenu {
 		System.out.print("\nERROR: Serial Already Exists!");
 	}
 
+	/**
+	 * Prompts the user for a puzzle type and validates their answer
+	 * @return returns the puzzle type as a string
+	 */
 	public String promptPuzzleType() {
 		System.out.print("\nEnter Puzzle type: ");
 		char PuzType = (input.nextLine().trim()+" ").charAt(0);
@@ -380,6 +452,10 @@ public class AppMenu {
 		promptContinue();
 	}
 
+	/**
+	 * Checks if the user is willing to remove the toy with a validated Y/N question
+	 * @return returns a boolean: true if the user chooses to delete the toy and false otherwise
+	 */
 	public Boolean promptRemove() {
 		System.out.print("\nDo you want to remove it (Y/N)? ");
 		Boolean removeOrNah = false;
@@ -394,6 +470,10 @@ public class AppMenu {
 		return removeOrNah;
 	}
 	
+	/**
+	 * Checks if the user is willing to buy the toy with a validated Y/N question
+	 * @return returns a boolean: true if the purchase goes through and false otherwise
+	 */
 	public Boolean promptSureToBuy() {
 		System.out.print("\nDo you want to buy this toy (Y/N)? ");
 		Boolean buyOrNah = false;
@@ -414,6 +494,9 @@ public class AppMenu {
 		
 	}
 
+	/**
+	 * Calls the user a coward. Very important.
+	 */
 	public void promptCoward() {
 		System.out.print("\nCoward.\n\n");
 		promptContinue();

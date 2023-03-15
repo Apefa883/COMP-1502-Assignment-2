@@ -20,6 +20,9 @@ public class BrowserManager {
 	private final String FILE_PATH = "res/toys.txt";
 	public boolean flag;
 	
+	/**
+	 * Constructor, which launches the application and loads up all data
+	 */
 	public BrowserManager() {
 		//Creates arraylist (loaded in other function)
 		AppMen = new AppMenu();
@@ -57,6 +60,9 @@ public class BrowserManager {
 		}
 	}
 
+	/**
+	 * Saves all data to toys.txt
+	 */
 	private void Save() {
 		try {
 			File db = new File(FILE_PATH);
@@ -157,7 +163,7 @@ public class BrowserManager {
 	}
 
 	/**
-	 * Submenu for toy searches
+	 * Handles user controls for the submenu used for toy searches
 	 */
 	private void Search() {
 		char option = 0;
@@ -192,7 +198,11 @@ public class BrowserManager {
 		}
 		
 	}
-	
+
+	/**
+	 * Handles the purchase of a toy through serial number
+	 * @param place the place in the Inventory of the toy to be purchased
+	 */
 	private void purchaseSerial(int place) {
 		AppMen.displaySerial(Inventory,place);
 		Boolean buying = AppMen.promptSureToBuy();
@@ -202,6 +212,9 @@ public class BrowserManager {
 		AppMen.promptContinue();
 	}
 
+	/**
+	 * A switch statement which handles the type of a toy to search for when searching by type.
+	 */
 	private void whichType() {
 		char option = 0;
 		Boolean flag = true;
@@ -289,7 +302,10 @@ public class BrowserManager {
 		
 	}
 
-	
+	/**
+	 * Adds a new serial, verifying that it does not already exist.
+	 * @return returns the serial.
+	 */
 	private String newSerial() {
 		String serial = AppMen.validateSerial();
 		Boolean existing = CheckExistingSerial(serial);
@@ -313,6 +329,9 @@ public class BrowserManager {
 		}
     }
 	
+	/**
+	 * Searches the inventory to find a toy with a given name. If it finds it, it will prompt the user to purchase it.
+	 */
 	private void searchByName() {
 	    String name = AppMen.promptName().trim().toLowerCase();
 	    ArrayList<Toy> matches = new ArrayList<>();
@@ -334,6 +353,10 @@ public class BrowserManager {
         }
 	}
 
+	/**
+	 * Searches for a toy with a corresponding serial
+	 * @return returns the place, in the Inventory, of the toy with the given serial if it exists
+	 */
 	private int searchBySerial() {
 		int place = -1;
 		String serial = AppMen.validateSerial();
