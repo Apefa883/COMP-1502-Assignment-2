@@ -181,7 +181,7 @@ public class BrowserManager {
 				searchByName();
 				break;
 			case '3':
-				searchByType();
+				whichType();
 				break;
 				
 			case '4':
@@ -193,6 +193,55 @@ public class BrowserManager {
 				break;
 			}
 		}
+		
+	}
+	
+	private void whichType() {
+		char option = 0;
+		Boolean flag = true;
+		while(flag == true) {
+			option = AppMen.promptType();
+			switch (option) {
+			case '1':
+				searchFigures();
+				break;
+			case '2':
+				searchAnimals();
+				break;
+			case '3':
+				searchPuzzles();
+				break;
+				
+			case '4':
+				searchBoardGames();
+				break;
+				
+			default:
+				AppMen.promptInvalidOption();
+				flag = false;
+				whichType();
+				break;
+			}
+		}
+	}
+	
+	private void searchFigures() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void searchAnimals() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void searchPuzzles() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void searchBoardGames() {
+		// TODO Auto-generated method stub
 		
 	}
 
