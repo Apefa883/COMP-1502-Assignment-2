@@ -104,7 +104,6 @@ public class BrowserManager {
 	 * array elements as parameters. Neat tech, isn't it?
 	 */
 	private void AddToy() {
-		Scanner input = new Scanner(System.in);
 		
 		String[] parameters = new String[8];
 		parameters[0] = newSerial();
@@ -196,9 +195,11 @@ public class BrowserManager {
 	
 	private void purchaseSerial(int place) {
 		AppMen.displaySerial(Inventory,place);
+		Boolean buying = AppMen.promptSureToBuy();
+		if(buying) {
+			buyThisToy(Inventory,place);
+		}
 		AppMen.promptContinue();
-		//TODO: Invokes purchasing method
-		//matches is pass-by-reference, so it should be easy to buy/sell just by calling Toy's methods.
 	}
 
 	private void whichType() {
@@ -282,8 +283,7 @@ public class BrowserManager {
         	
         	int choice = AppMen.displayResults(matches);
         	if(choice < matches.size()) {
-        		//TODO: Invokes purchasing method
-        		//matches is pass-by-reference, so it should be easy to buy/sell just by calling Toy's methods.
+        		buyThisToy(matches,choice);
         	}
         }
 		
@@ -301,7 +301,18 @@ public class BrowserManager {
 		return serial;
 	}
 	
-
+	/**
+	 * Buys a toy
+	 * @param InStorage an arraylist, either the inventory or those matching a search, to remove a toy from
+	 * @param place the spot in the InStorage arraylist to buy a toy from
+	 */
+	public void buyThisToy(ArrayList<Toy> InStorage, int place) {
+		if(InStorage.get(place).getCount() > 0) {
+			InStorage.get(place).sellToy(1);
+	        AppMen.promptPurchased();
+		}
+    }
+	
 	private void searchByName() {
 	    String name = AppMen.promptName().trim().toLowerCase();
 	    ArrayList<Toy> matches = new ArrayList<>();
@@ -318,8 +329,7 @@ public class BrowserManager {
         	
         	int choice = AppMen.displayResults(matches);
         	if(choice < matches.size()) {
-        		//TODO: Invokes purchasing method
-        		//matches is pass-by-reference, so it should be easy to buy/sell just by calling Toy's methods.
+        		buyThisToy(matches,choice);
         	}
         }
 	}

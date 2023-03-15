@@ -128,7 +128,7 @@ public class AppMenu {
 	}
 
 	public void promptPurchased() {
-		System.out.println("Purchase Successful!");
+		System.out.print("\nPurchase Successful!\n\n");
 		
 	}
 
@@ -206,7 +206,6 @@ public class AppMenu {
 	}
 	
 	public String validateSerial() {
-		Scanner input = new Scanner(System.in);
 	    promptSerial();
 	    String serial = input.nextLine();
 	    Boolean validNumber = false;
@@ -393,6 +392,20 @@ public class AppMenu {
 			removeOrNah = true;
 		}
 		return removeOrNah;
+	}
+	
+	public Boolean promptSureToBuy() {
+		System.out.print("\nDo you want to buy this toy (Y/N)? ");
+		Boolean buyOrNah = false;
+		char answer = (input.nextLine().trim()+" ").charAt(0);
+		while(Character.toLowerCase(answer) != 'y' && Character.toLowerCase(answer) != 'n') {
+			System.out.print("\nInvalid answer! Again, do you want to buy this? (Y/N): ");
+			answer = (input.nextLine().trim()+" ").charAt(0);
+		}
+		if(answer == 'y') {
+			buyOrNah = true;
+		}
+		return buyOrNah;
 	}
 
 	public void promptKilled() {
