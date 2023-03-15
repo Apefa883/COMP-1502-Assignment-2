@@ -104,7 +104,7 @@ public class AppMenu {
 	}
 	
 	public void OutOfStock() {
-		System.out.println("\nThis item is out of stock.\n");
+		System.out.println("\nNo items with this serial number found.\n");
 	}
 
 	public String promptSelectType() {
@@ -377,6 +377,31 @@ public class AppMenu {
 
 	public void promptSaveFailure() {
 		System.out.print("\nERROR: Failed to save data!\n");
+		promptContinue();
+	}
+
+	public Boolean promptRemove() {
+		System.out.print("\nDo you want to remove it (Y/N)? ");
+		Boolean removeOrNah = false;
+		char answer = (input.nextLine().trim()+" ").charAt(0);
+		while(Character.toLowerCase(answer) != 'y' && Character.toLowerCase(answer) != 'n') {
+			System.out.print("\nInvalid answer! Again, do you want to remove it (Y/N): ");
+			answer = (input.nextLine().trim()+" ").charAt(0);
+		}
+		if(answer == 'y') {
+			removeOrNah = true;
+		}
+		return removeOrNah;
+	}
+
+	public void promptKilled() {
+		System.out.print("\nItem Removed!\n");
+		promptContinue();
+		
+	}
+
+	public void promptCoward() {
+		System.out.print("\nCoward.\n\n");
 		promptContinue();
 	}
 }

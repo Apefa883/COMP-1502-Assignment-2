@@ -50,7 +50,7 @@ public class BrowserManager {
 				break;
 			case '3':
 				RemoveToy();
-				flag = false;
+				break;
 			case '4':
 				Save();
 				flag = false;
@@ -76,8 +76,28 @@ public class BrowserManager {
 		}
 	}
 
+	/**
+	 * Removes an existing toy
+	 */
 	private void RemoveToy() {
-		
+		int place = -1;
+		while(place == -1) {
+			place = searchBySerial();
+			if(place == -1) {
+				AppMen.OutOfStock();
+				AppMen.promptContinue();
+			} else {
+				break;
+			}
+		}
+		AppMen.displaySerial(Inventory,place);
+		Boolean kill = AppMen.promptRemove();
+		if(kill) {
+			Inventory.remove(place);
+			AppMen.promptKilled();
+		} else {
+			AppMen.promptCoward();
+		}
 	}
 
 	/**
@@ -138,6 +158,9 @@ public class BrowserManager {
 		AppMen.newToy();
 	}
 
+	/**
+	 * Submenu for toy searches
+	 */
 	private void Search() {
 		char option = 0;
 		Boolean flag = true;
