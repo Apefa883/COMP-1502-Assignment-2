@@ -169,8 +169,7 @@ public class BrowserManager {
 			case '1':
 				int place = searchBySerial();
 				if(place > -1) {
-					AppMen.displaySerial(Inventory,place);
-					AppMen.promptContinue();
+					purchaseSerial(place);
 				} else {
 					AppMen.OutOfStock();
 					AppMen.promptContinue();
@@ -195,6 +194,13 @@ public class BrowserManager {
 		
 	}
 	
+	private void purchaseSerial(int place) {
+		AppMen.displaySerial(Inventory,place);
+		AppMen.promptContinue();
+		//TODO: Invokes purchasing method
+		//matches is pass-by-reference, so it should be easy to buy/sell just by calling Toy's methods.
+	}
+
 	private void whichType() {
 		char option = 0;
 		Boolean flag = true;
@@ -202,17 +208,20 @@ public class BrowserManager {
 			option = AppMen.promptType();
 			switch (option) {
 			case '1':
-				searchFigures();
+				searchType(1);
+				flag = false;
 				break;
 			case '2':
-				searchAnimals();
+				searchType(2);
+				flag = false;
 				break;
 			case '3':
-				searchPuzzles();
+				searchType(3);
+				flag = false;
 				break;
-				
 			case '4':
-				searchBoardGames();
+				searchType(4);
+				flag = false;
 				break;
 				
 			default:
@@ -224,80 +233,60 @@ public class BrowserManager {
 		}
 	}
 	
-	private void searchFigures() {
-		// TODO Auto-generated method stub
-		System.out.println("SearchFigures invoked.");
+	/**
+	 * Searches for all toys corresponding with the given type.
+	 * @param typeID
+	 */
+	private void searchType(int typeID) {
 		
-	}
-
-	private void searchAnimals() {
-		// TODO Auto-generated method stub
-		System.out.println("SearchAnimals invoked.");
-		
-	}
-
-	private void searchPuzzles() {
-		// TODO Auto-generated method stub
-		System.out.println("SearchPuzzles invoked.");
-		
-	}
-
-	private void searchBoardGames() {
-		// TODO Auto-generated method stub
-		System.out.println("SearchBoardGames invoked.");
-		
-	}
-
-	private void searchByType() {
-		
-		Scanner input = new Scanner(System.in);
-	    AppMen.promptType();
-	    String type = input.nextLine().toLowerCase();
-
 	    ArrayList<Toy> matches = new ArrayList<>();
 
-	    for (Toy toy : Inventory) {
-	        if (toy.getClass().getSimpleName().equalsIgnoreCase(type)) {
-	            matches.add(toy);
+	    switch(typeID) {
+	    case(1):
+	    	//figure
+	    	for (int i = 0; i < Inventory.size(); i++) {        	
+	        	if(Inventory.get(i) instanceof figure) {
+	        		matches.add(Inventory.get(i));
+	        	}
 	        }
+	    	break;
+	    case(2):
+	    	//animal
+	    	for (int i = 0; i < Inventory.size(); i++) {        	
+	        	if(Inventory.get(i) instanceof animal) {
+	        		matches.add(Inventory.get(i));
+	        	}
+	        }
+	    	break;
+	    case(3):
+	    	//puzzle
+	    	for (int i = 0; i < Inventory.size(); i++) {        	
+	        	if(Inventory.get(i) instanceof puzzle) {
+	        		matches.add(Inventory.get(i));
+	        	}
+	        }
+	    	break;
+	    case(4):
+	    	//boardgame
+	    	for (int i = 0; i < Inventory.size(); i++) {        	
+	        	if(Inventory.get(i) instanceof boardgame) {
+	        		matches.add(Inventory.get(i));
+	        	}
+	        }
+	        break;
 	    }
+    
+        if(matches.size() < 1) {
+        	AppMen.promptOutOfStock();
+        } else {
+        	
+        	int choice = AppMen.displayResults(matches);
+        	if(choice < matches.size()) {
+        		//TODO: Invokes purchasing method
+        		//matches is pass-by-reference, so it should be easy to buy/sell just by calling Toy's methods.
+        	}
+        }
 		
-	    if (matches.isEmpty()) {
-	    	AppMen.promptNotFound();
-	    } else {
-	        for (Toy toy : matches) {
-	            AppMen.showToy();
-	        }
-
-	        String selection = AppMen.promptSelectType();
-
-	        if (selection.equalsIgnoreCase("cancel")) {
-	            return;
-	        }
-	        
-	        Toy selectedToy = null;
-	        
-	        for (Toy toy : matches) {
-	            if (toy.getSerial() == selection) {
-	                selectedToy = toy;
-	                break;
-	            }
-	        }
-
-	        if (selectedToy == null) {
-	            AppMen.promptInvalid();
-	        } else {
-	            int count = selectedToy.getCount();
-	            if (count == 0) {
-	                AppMen.promptOutOfStock();
-	            } else {
-	                selectedToy.setCount(count - 1);
-	                AppMen.promptPurchased();
-	                
-	                AppMen.promptContinue();
-	            }
-	        }
-	    }
 	}
 
 	
@@ -330,6 +319,7 @@ public class BrowserManager {
         	int choice = AppMen.displayResults(matches);
         	if(choice < matches.size()) {
         		//TODO: Invokes purchasing method
+        		//matches is pass-by-reference, so it should be easy to buy/sell just by calling Toy's methods.
         	}
         }
 	}
