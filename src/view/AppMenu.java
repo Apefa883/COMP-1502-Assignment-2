@@ -413,4 +413,40 @@ public class AppMenu {
 		System.out.print("******************************");
 		System.out.print("");
 	}
+
+	/**
+	 * Displays results of a search
+	 * @param matches A list of items matching the user's search
+	 * @return The index, in matches[], of the object to purchase
+	 */
+	public int displayResults(ArrayList<Toy> matches) {
+		int j;
+    	for (j = 0; j < matches.size(); j++) {
+        	System.out.println("("+(j+1)+") "+matches.get(j).toString());
+        }
+    	System.out.println("("+(j+1)+") Back to Search Menu");
+    	
+    	
+    	System.out.print("\n\nEnter option number to purchase: ");
+		String ChoiceIO = input.nextLine().trim();
+		int Choice = -1;
+		while(Choice < 0 || Choice >= matches.size()) {
+			try {	
+				Choice = Integer.parseInt(ChoiceIO) - 1;
+				if(Choice < matches.size() && Choice >= 0) {
+					break;
+				} else if(Choice == matches.size()) {
+					break;
+				} else {
+					System.out.print("\nChoose a valid menu option! Try again: ");
+					ChoiceIO = input.nextLine().trim();
+				}
+			}catch (Exception e) {
+				System.out.print("\nChoice must be a valid positive whole number! Try again: ");
+				ChoiceIO = input.nextLine().trim();
+			}
+		}
+    	
+		return Choice;
+	}
 }

@@ -6,7 +6,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import exception.NegativePrice;
 import model.Toy;
 import model.animal;
 import model.boardgame;
@@ -227,21 +226,25 @@ public class BrowserManager {
 	
 	private void searchFigures() {
 		// TODO Auto-generated method stub
+		System.out.println("SearchFigures invoked.");
 		
 	}
 
 	private void searchAnimals() {
 		// TODO Auto-generated method stub
+		System.out.println("SearchAnimals invoked.");
 		
 	}
 
 	private void searchPuzzles() {
 		// TODO Auto-generated method stub
+		System.out.println("SearchPuzzles invoked.");
 		
 	}
 
 	private void searchBoardGames() {
 		// TODO Auto-generated method stub
+		System.out.println("SearchBoardGames invoked.");
 		
 	}
 
@@ -311,18 +314,24 @@ public class BrowserManager {
 	
 
 	private void searchByName() {
-		Scanner input = new Scanner(System.in);
-	    AppMen.promptName();
-	    String name = input.nextLine().toLowerCase();
-
+	    String name = AppMen.promptName().trim().toLowerCase();
 	    ArrayList<Toy> matches = new ArrayList<>();
 
-        for (Toy toy : Inventory) {
-            if (toy.getName().toLowerCase().contains(name.toLowerCase())) {
-                matches.add(toy);
-            }
+        for (int i = 0; i < Inventory.size(); i++) {        	
+        	if(Inventory.get(i).getName().toLowerCase().matches(name)) {
+        		matches.add(Inventory.get(i));
+        	}
         }
-
+        
+        if(matches.size() < 1) {
+        	AppMen.promptOutOfStock();
+        } else {
+        	
+        	int choice = AppMen.displayResults(matches);
+        	if(choice < matches.size()) {
+        		//TODO: Invokes purchasing method
+        	}
+        }
 	}
 
 	private int searchBySerial() {
@@ -339,6 +348,11 @@ public class BrowserManager {
 	    
 	}
 	
+	/**
+	 * Checks if a given serial is already in the inventory.
+	 * @param serial
+	 * @return a boolean indicating if this serial is present or not
+	 */
 	private Boolean CheckExistingSerial(String serial) {
 		Boolean exists = false;
 		for(int i = 0; i<Inventory.size(); i++ ) {
