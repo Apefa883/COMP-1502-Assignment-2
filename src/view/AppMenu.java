@@ -68,14 +68,15 @@ public class AppMenu {
 		return option;
 	}
 	
-	public String promptType() {
+	public char promptType() {
 		System.out.print("Enter a toy type: \n");
 		System.out.println("(1)   Figure");
 		System.out.println("(2)   Animal");
 		System.out.println("(3)   Puzzle");
 		System.out.println("(4)   Board Game");
-		String type = input.nextLine().trim();
-		return type;
+		
+		char option = input.nextLine().toLowerCase().charAt(0);
+		return option;
 	}
 	
 	public void promptSerial() {
@@ -378,5 +379,13 @@ public class AppMenu {
 	public void promptSaveFailure() {
 		System.out.print("\nERROR: Failed to save data!\n");
 		promptContinue();
+	}
+	
+	public void promptInvalidOption() {
+		System.out.print("");
+		System.out.print("******************************");
+		System.out.print("* Invalid Option! Try Again! *");
+		System.out.print("******************************");
+		System.out.print("");
 	}
 }
