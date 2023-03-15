@@ -253,11 +253,11 @@ public class AppMenu {
 
 	public String promptClassification() {
 		System.out.print("\nEnter Figure Classification: ");
-		char FigType = input.nextLine().trim().charAt(0);
+		char FigType = (input.nextLine().trim()+" ").charAt(0);
 		while(Character.toLowerCase(FigType) != 'a' && Character.toLowerCase(FigType) != 'd' && 
 				Character.toLowerCase(FigType) != 'h') {
 			System.out.print("\nIncorrect value entered! Must be A (Action), D (Doll), or H (Historic): ");
-			FigType = input.nextLine().trim().charAt(0);
+			FigType = (input.nextLine().trim()+" ").charAt(0);
 		}
 		return FigType+"";
 	}
@@ -274,13 +274,11 @@ public class AppMenu {
 
 	public String promptSize() {
 		System.out.print("\nEnter Animal Size: ");
-		char Size = input.nextLine().trim().charAt(0);
+		char Size = (input.nextLine().trim()+" ").charAt(0);
 		while(Character.toLowerCase(Size) != 's' && Character.toLowerCase(Size) != 'm' && 
 				Character.toLowerCase(Size) != 'l') {
 			System.out.print("\nIncorrect value entered! Must be S (Small), M (Medium), or L (Large): ");
-			Size = input.nextLine().trim().charAt(0);
-			System.out.println(Size);
-			System.out.println(Character.toLowerCase(Size));
+			Size = (input.nextLine().trim()+" ").charAt(0);
 		}
 		return Size+"";
 	}
@@ -342,9 +340,6 @@ public class AppMenu {
 		}
 		return (min+"-"+max);
 	}
-
-	
-	//EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE	
 	
 	
 	public String promptDesigners() {
@@ -364,21 +359,24 @@ public class AppMenu {
 
 	public String promptPuzzleType() {
 		System.out.print("\nEnter Puzzle type: ");
-		char PuzType = input.nextLine().trim().charAt(0);
+		char PuzType = (input.nextLine().trim()+" ").charAt(0);
 		while(Character.toLowerCase(PuzType) != 'm' && Character.toLowerCase(PuzType) != 'c' && 
 				Character.toLowerCase(PuzType) != 'l' && Character.toLowerCase(PuzType) != 't' 
 				&& Character.toLowerCase(PuzType) != 'r') {
 			System.out.print("\nIncorrect value entered! Must be M (Mechanical), C (Cryptic), L (Logical), "
 					+ "T (Trivia), or R (Riddle): ");
-			PuzType = input.nextLine().trim().charAt(0);
-			System.out.println(PuzType);
-			System.out.println(Character.toLowerCase(PuzType));
+			PuzType = (input.nextLine().trim()+" ").charAt(0);
 		}
 		return PuzType+"";
 	}
 
 	public void newToy() {
 		System.out.print("\nNew Toy Added!\n");
+		promptContinue();
+	}
+
+	public void promptSaveFailure() {
+		System.out.print("\nERROR: Failed to save data!\n");
 		promptContinue();
 	}
 }

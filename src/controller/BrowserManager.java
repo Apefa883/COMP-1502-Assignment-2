@@ -52,41 +52,39 @@ public class BrowserManager {
 				RemoveToy();
 				flag = false;
 			case '4':
-				try {
-					Save();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				Save();
 				flag = false;
 			}
 		}
 	}
 
-	private void Save() throws IOException {
-		File db = new File(FILE_PATH);
-		PrintWriter pw = new PrintWriter(db);
-		
-		AppMen.promptSaving();
-		
-		for (Toy t: Inventory) {
-			pw.println(t.format());
+	private void Save() {
+		try {
+			File db = new File(FILE_PATH);
+			PrintWriter pw = new PrintWriter(db);
+			
+			AppMen.promptSaving();
+			
+			for (Toy t: Inventory) {
+				pw.println(t.format());
+			}
+			
+			pw.close();
+			AppMen.promptSaved();
+		} catch(IOException g) {
+			AppMen.promptSaveFailure();
 		}
-		
-		pw.close();
-		AppMen.promptSaved();
 	}
 
 	private void RemoveToy() {
 		
 	}
 
+	/**
+	 * Loads all the toy elements into an array of strings, then creates a new object with all 
+	 * array elements as parameters. Neat tech, isn't it?
+	 */
 	private void AddToy() {
-		/*
-		 * Basic idea - we do common prompts to fill up the superclass, then a switch statement to handle other stuff
-		 * The new toy is stored as a string similar to the toys.txt format.
-		 * This will require a metric crapton of prompts in AppMenu. So there's that.
-		 */
 		Scanner input = new Scanner(System.in);
 		
 		String[] parameters = new String[8];
